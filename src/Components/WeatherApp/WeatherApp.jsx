@@ -78,7 +78,9 @@ export const WeatherApp = () => {
   return (
     <div className="weather-app">
       <Form className="form">
-        <img src={logo} alt="logo" className="logo"/>
+        <a href="/">
+          <img src={logo} alt="logo" className="logo" />
+        </a>
         <Form.Control
           type="search"
           placeholder="Enter your city ..."
