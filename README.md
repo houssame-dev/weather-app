@@ -4,7 +4,7 @@
 
 ## Introduction
 
-Welcome to Weather TwoDay, your go-to weather app website designed to keep you informed and prepared for any weather conditions. WeatherWise provides you with real-time weather updates, detailed forecasts, and accurate local weather conditions, all wrapped in an intuitive and user-friendly interface.
+Welcome to Weather TwoDay, your go-to weather app website designed to keep you informed and prepared for any weather conditions. Weather TwoDay provides you with real-time weather updates, detailed forecasts, and accurate local weather conditions, all wrapped in an intuitive and user-friendly interface.
 
 ## Features
 
