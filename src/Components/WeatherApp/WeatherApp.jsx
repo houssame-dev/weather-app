@@ -89,7 +89,7 @@ export const WeatherApp = () => {
           onKeyDown={handleKeyDown}
         />
         <Button
-          variant="outline-info"
+          variant="primary"
           className="btn-search"
           onClick={() => {
             search();
@@ -116,6 +116,7 @@ export const WeatherApp = () => {
               </div>
               humidity
             </Card.Title>
+            |
             <Card.Title>
               <div className="wind-div">
                 <WiStrongWind size={30} /> <span className="wind"></span>

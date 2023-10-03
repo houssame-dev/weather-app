@@ -1,11 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Reem+Kufi+Fun:wght@700&display=swap');
 
 .App {
-  background-image: url("./Components/Assets/back4.jpg");
-  background-position: center;
+  background-image: url("./Components/Assets/background.jpg");
+  background-position: right;
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
   min-height: 100vh;
   font-family: 'Reem Kufi Fun', sans-serif;
+  background-blend-mode: multiply;
+  background-color: lightblue;
 }
