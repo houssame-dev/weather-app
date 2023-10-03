@@ -125,3 +125,9 @@
     display: none;
   }
 }
+
+@media (max-height: 600px) {
+  .weather-app .form {
+    margin-block: 0 0.5rem;
+  }
+}
