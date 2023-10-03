@@ -23,7 +23,7 @@ Visit our [Weather TwoDay](https://weathertwoday.netlify.app/) and simply enter 
 
 ## Contributing
 
-We welcome contributions from passionate weather enthusiasts, developers, and designers. If you'd like to contribute to WeatherWise, please review our [Contribution Guidelines](CONTRIBUTING.md) for details.
+We welcome contributions from passionate weather enthusiasts, developers, and designers. If you'd like to contribute to Weather TwoDay, please review our [Contribution Guidelines](CONTRIBUTING.md) for details.
 
 ## License
 
