@@ -3,16 +3,30 @@ import "./WeatherApp.css";
 import { Button, Card, Form } from "react-bootstrap";
 import { FaSearch } from "react-icons/fa";
 import { WiHumidity, WiStrongWind } from "react-icons/wi";
-import cloud_icon from "../Assets/cloud.png";
-import clear_icon from "../Assets/clear.png";
-import drizzle_icon from "../Assets/drizzle.png";
-import rain_icon from "../Assets/rain.png";
-import snow_icon from "../Assets/snow.png";
+import day_clear_sky from "../Assets/day_clear_sky.png";
+import day_few_clouds from "../Assets/day_few_clouds.png";
+import day_scattered_clouds from "../Assets/day_scattered_clouds.png";
+import day_broken_clouds from "../Assets/day_broken_clouds.png";
+import day_shower_rain from "../Assets/day_shower_rain.png";
+import day_rain from "../Assets/day_rain.png";
+import day_thunderstorm from "../Assets/day_thunderstorm.png";
+import day_snow from "../Assets/day_snow.png";
+import day_mist from "../Assets/day_mist.png";
+import night_clear_sky from "../Assets/day_clear_sky.png";
+import night_few_clouds from "../Assets/night_few_clouds.png";
+import night_scattered_clouds from "../Assets/night_scattered_clouds.png";
+import night_broken_clouds from "../Assets/night_broken_clouds.png";
+import night_shower_rain from "../Assets/night_shower_rain.png";
+import night_rain from "../Assets/night_rain.png";
+import night_thunderstorm from "../Assets/night_thunderstorm.png";
+import night_snow from "../Assets/night_snow.png";
+import night_mist from "../Assets/night_mist.png";
+import night_full_moon_clear from "../Assets/night_full_moon_clear.png";
 import logo from "../Assets/logo.png";
 
 export const WeatherApp = () => {
   let api_key = "bc7bcc1079f62421f60e6ce473e723b7";
-  const [wicon, setWicon] = useState(cloud_icon);
+  const [wicon, setWicon] = useState(day_clear_sky);
   const search = async () => {
     const element = document.getElementsByClassName("search-input");
     if (element[0].value === "") {
@@ -33,40 +47,44 @@ export const WeatherApp = () => {
     temprature[0].innerHTML = Math.floor(data.main.temp) + "° C";
     location[0].innerHTML = data.name + ", ";
     country[0].innerHTML = data.sys.country;
-    if (data.weather[0].icon === "01d" || data.weather[0].icon === "01") {
-      setWicon(clear_icon);
-    } else if (
-      data.weather[0].icon === "02d" ||
-      data.weather[0].icon === "02"
-    ) {
-      setWicon(cloud_icon);
-    } else if (
-      data.weather[0].icon === "03d" ||
-      data.weather[0].icon === "03"
-    ) {
-      setWicon(drizzle_icon);
-    } else if (
-      data.weather[0].icon === "04d" ||
-      data.weather[0].icon === "04"
-    ) {
-      setWicon(drizzle_icon);
-    } else if (
-      data.weather[0].icon === "09d" ||
-      data.weather[0].icon === "09"
-    ) {
-      setWicon(rain_icon);
-    } else if (
-      data.weather[0].icon === "10d" ||
-      data.weather[0].icon === "10"
-    ) {
-      setWicon(rain_icon);
-    } else if (
-      data.weather[0].icon === "13d" ||
-      data.weather[0].icon === "13"
-    ) {
-      setWicon(snow_icon);
+    if (data.weather[0].icon === "01d") {
+      setWicon(day_clear_sky);
+    } else if (data.weather[0].icon === "02d") {
+      setWicon(day_few_clouds);
+    } else if (data.weather[0].icon === "03d") {
+      setWicon(day_scattered_clouds);
+    } else if (data.weather[0].icon === "04d") {
+      setWicon(day_broken_clouds);
+    } else if (data.weather[0].icon === "09d") {
+      setWicon(day_shower_rain);
+    } else if (data.weather[0].icon === "10d") {
+      setWicon(day_rain);
+    } else if (data.weather[0].icon === "11d") {
+      setWicon(day_thunderstorm);
+    } else if (data.weather[0].icon === "13d") {
+      setWicon(day_snow);
+    } else if (data.weather[0].icon === "50d") {
+      setWicon(day_mist);
+    } else if (data.weather[0].icon === "01n") {
+      setWicon(night_clear_sky);
+    } else if (data.weather[0].icon === "02n") {
+      setWicon(night_few_clouds);
+    } else if (data.weather[0].icon === "03n") {
+      setWicon(night_scattered_clouds);
+    } else if (data.weather[0].icon === "04n") {
+      setWicon(night_broken_clouds);
+    } else if (data.weather[0].icon === "09n") {
+      setWicon(night_shower_rain);
+    } else if (data.weather[0].icon === "10n") {
+      setWicon(night_rain);
+    } else if (data.weather[0].icon === "11n") {
+      setWicon(night_thunderstorm);
+    } else if (data.weather[0].icon === "13n") {
+      setWicon(night_snow);
+    } else if (data.weather[0].icon === "50n") {
+      setWicon(night_mist);
     } else {
-      setWicon(clear_icon);
+      setWicon(night_full_moon_clear);
     }
   };
   const handleKeyDown = (event) => {
