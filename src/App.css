@@ -6,7 +6,7 @@ body{
 
 .App {
   background-image: url("./Components/Assets/background.jpg");
-  background-position: right;
+  background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
