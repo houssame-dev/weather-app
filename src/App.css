@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Reem+Kufi+Fun:wght@700&display=swap");
 
 body{
-  overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 .App {
@@ -13,5 +13,5 @@ body{
   min-height: 100vh;
   font-family: "Reem Kufi Fun", sans-serif;
   background-blend-mode: multiply;
-  background-color: lightblue;
+  background-color: gray;
 }
