@@ -7,17 +7,6 @@
   padding: 5px;
   border: none;
   border-radius: 50px;
-  background: #8e2de2; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to left,
-    #4a00e0,
-    #8e2de2
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to left,
-    #4a00e0,
-    #8e2de2
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .weather-app .form {
@@ -33,9 +22,6 @@
 .weather-app .search-input {
   border-radius: 50px;
   border: none;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
-    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
 .weather-app .btn-div {
@@ -47,19 +33,9 @@
 
 .weather-app .btn-search {
   border-radius: 50px;
-  border: 2px solid white;
-  color: white;
-  background: #8e2de2; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to left,
-    #4a00e0,
-    #8e2de2
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to left,
-    #4a00e0,
-    #8e2de2
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  border: none;
+  color: black;
+  background-color: cyan;
 }
 
 .weather-app .card {
@@ -68,13 +44,9 @@
   max-width: 50rem;
   margin-inline: auto;
   border-radius: 15px;
-  border: 2px solid white;
-  background-image: url("../Assets/back.jpg");
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-blend-mode: multiply;
-  background-color: gray;
+  border: none;
+  backdrop-filter: blur(20px);
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 .weather-app .temprature {

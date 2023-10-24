@@ -107,7 +107,7 @@ export const WeatherApp = () => {
           onKeyDown={handleKeyDown}
         />
         <Button
-          variant="primary"
+          variant="info"
           className="btn-search"
           onClick={() => {
             search();
