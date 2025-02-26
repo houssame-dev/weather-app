@@ -1,0 +1,68 @@
+.sidebar {
+  width: 300px;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: #4338d681;
+  padding: 20px;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-title {
+  color: #ffffff;
+  font-size: 20px;
+}
+
+.sidebar-temp {
+  color: #ffffff;
+  font-size: 80px;
+}
+
+.sidebar-day {
+  color: #ffffff;
+  font-size: 20px;
+}
+
+.sidebar-time {
+  color: #ecc8c8;
+  font-size: 20px;
+  font-weight: 100;
+}
+
+.sidebar-status {
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 100;
+  }
+
+  
+  .sidebar-rain {
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 100;
+  }
+
+  .sidebar-city-name {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 28px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #ffffff;
+    white-space: nowrap;
+    z-index: 1;
+  }
+  
+  .sidebar-city-img{
+    width: 100%;
+    border-radius: 30px;
+    filter: brightness(60%); /* (100% = normal, lower = darker) */
+  }
+
+.content {
+  margin-left: 320px;
+  padding: 20px;
+}
