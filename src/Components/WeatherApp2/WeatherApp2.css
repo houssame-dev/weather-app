@@ -1,68 +1,148 @@
+/* sidebar */
+
 .sidebar {
   width: 300px;
   height: 100vh;
   position: fixed;
   left: 0;
   top: 0;
-  background: #4338d681;
+  background: #4338d67a;
   padding: 20px;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  overflow-y: scroll;
 }
 
 .sidebar-title {
   color: #ffffff;
-  font-size: 20px;
+  font-size: 28px;
+  font-family: "Dancing Script", serif;
+  font-weight: 700; /* (400 500 600 700) */
 }
 
 .sidebar-temp {
   color: #ffffff;
   font-size: 80px;
+  font-family: "Lilita One", serif;
+  font-weight: 400; /* (only 400) */
 }
 
 .sidebar-day {
   color: #ffffff;
   font-size: 20px;
+  font-family: "Kanit", serif;
+  font-weight: 300; /* (100 200 300 400 500 600 700 800 900) (Italic) */
 }
 
 .sidebar-time {
   color: #ecc8c8;
   font-size: 20px;
-  font-weight: 100;
+  font-family: "Kanit", serif;
+  font-weight: 200; /* (100 200 300 400 500 600 700 800 900) (Italic) */
 }
 
 .sidebar-status {
-    color: #ffffff;
-    font-size: 15px;
-    font-weight: 100;
-  }
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 100;
+  font-family: "Kanit", serif;
+  font-weight: 200; /* (100 200 300 400 500 600 700 800 900) (Italic) */
+}
 
-  
-  .sidebar-rain {
-    color: #ffffff;
-    font-size: 15px;
-    font-weight: 100;
-  }
+.sidebar-rain {
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 100;
+  font-family: "Kanit", serif;
+  font-weight: 200; /* (100 200 300 400 500 600 700 800 900) (Italic) */
+}
 
-  .sidebar-city-name {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 28px;
-    padding: 5px 10px;
-    border-radius: 5px;
-    color: #ffffff;
-    white-space: nowrap;
-    z-index: 1;
-  }
-  
-  .sidebar-city-img{
-    width: 100%;
-    border-radius: 30px;
-    filter: brightness(60%); /* (100% = normal, lower = darker) */
-  }
+.sidebar-city-name {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 28px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #ffffff;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.sidebar-city-img {
+  width: 100%;
+  border-radius: 30px;
+  filter: brightness(60%); /* (100% = normal, lower = darker) */
+}
+
+/* Set the width of the scrollbar */
+::-webkit-scrollbar {
+  width: 6px; /* Adjust as needed */
+}
+
+/* Style the track (the part the thumb slides within) */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Light grey */
+  border-radius: 10px;
+}
+
+/* Style the thumb (the draggable part) */
+::-webkit-scrollbar-thumb {
+  background: #888; /* Dark grey */
+  border-radius: 10px;
+}
+
+/* Change thumb color on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Darker grey */
+}
+
+/* content */
 
 .content {
   margin-left: 320px;
   padding: 20px;
+}
+
+.todays-highlights-title{
+  color: #ffffff;
+  font-size: 40px;
+  font-family: "Lilita One", serif;
+  font-weight: 400; /* (only 400) */
+}
+
+.content .card {
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  height: 10rem;
+}
+
+.content .card-title{
+  color: #ffffff;
+  font-size: 20px;
+  font-family: "Lilita One", serif;
+  font-weight: 400; /* (only 400) */
+}
+
+.content .card-sunrise-sunset {
+  background: linear-gradient(to right, #e6a51979, #f7c9a07a);
+}
+
+.content .card-wind {
+  background: linear-gradient(to right, #226ba37a, #a0c4d77a);
+}
+
+.content .card-humidity {
+  background: linear-gradient(to right, #627e757a, #a8c0a07a);
+}
+
+.content .card-temperature {
+  background: linear-gradient(to right, #e05b197a, #f7a8007a);
+}
+
+.content .card-pressure {
+  background: linear-gradient(to right, #d2a9857a, #e0c8b07a);
+}
+
+.content .card-visibility {
+  background: linear-gradient(to right, #9136397a, #d8a0a07a);
 }

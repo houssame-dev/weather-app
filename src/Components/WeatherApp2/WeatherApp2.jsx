@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import "./WeatherApp2.css";
-import { Button, Card, Form } from "react-bootstrap";
-import { FaSearch } from "react-icons/fa";
-import { WiHumidity, WiStrongWind } from "react-icons/wi";
 import day_clear_sky from "../Assets/day_clear_sky.png";
 import day_few_clouds from "../Assets/day_few_clouds.png";
 import day_scattered_clouds from "../Assets/day_scattered_clouds.png";
@@ -24,10 +21,8 @@ import night_mist from "../Assets/night_mist.png";
 import night_full_moon_clear from "../Assets/night_full_moon_clear.png";
 import newyork from "../Assets/newyork.jpg";
 import logo from "../Assets/logo.png";
-import { CiCloudOn } from "react-icons/ci";
-import { LuCloudRainWind } from "react-icons/lu";
-import { RxCalendar } from "react-icons/rx";
-import { WiTime4 } from "react-icons/wi";
+import { MdCalendarMonth, MdAccessTime } from "react-icons/md";
+import { WiNightAltCloudy, WiRain } from "react-icons/wi";
 
 export const WeatherApp2 = () => {
   let api_key = "bc7bcc1079f62421f60e6ce473e723b7";
@@ -38,6 +33,7 @@ export const WeatherApp2 = () => {
       return 0;
     }
     let url = `https://api.openweathermap.org/data/2.5/weather?q=${element[0].value}&units=Metric&appid=${api_key}`;
+    let url2 = `https://api.openweathermap.org/data/2.5/forecast?q=${element[0].value}&units=Metric&appid=${api_key}`
     let response = await fetch(url);
     let data = await response.json();
 
@@ -120,66 +116,70 @@ export const WeatherApp2 = () => {
         </div>
         <div className="d-flex justify-content-start align-items-center gap-4">
           <div className="d-flex justify-content-start align-items-center gap-1">
-            <RxCalendar color="#ffffff" />
-            <span className="sidebar-day">Monday,</span>
+            <MdCalendarMonth color="#ffffff" size={19}/>
+            <span className="sidebar-day">Mon - 23/09</span>
           </div>
           <div className="d-flex justify-content-start align-items-center gap-1">
-            <WiTime4 color="#ecc8c8" />
+            <MdAccessTime color="#ecc8c8" size={19}/>
             <span className="sidebar-time">16:05:34</span>
           </div>
         </div>
         <hr />
         <div className="d-flex justify-content-start align-items-center gap-2">
-          <CiCloudOn color="#ffffff" />
-          <span className="sidebar-status">Mostly Cloudy</span>
+          <WiNightAltCloudy color="#ffffff" size={19}/>
+          <span className="sidebar-status">Clouds</span>
         </div>
         <div className="d-flex justify-content-start align-items-center gap-2">
-          <LuCloudRainWind color="#ffffff" />
+          <WiRain color="#ffffff" size={19}/>
           <span className="sidebar-rain">Rain - 30%</span>
         </div>
         <div className="d-flex justify-content-center align-items-center mt-4 position-relative">
-          <span className="sidebar-city-name">New York</span>
+          <span className="sidebar-city-name">New York, US</span>
           <img src={newyork} alt="city-img" className="sidebar-city-img" />
         </div>
       </div>
 
       <div class="content">
-        <h2>Today's Highlights</h2>
-        <div class="row g-4">
+        <span className="todays-highlights-title">Today's Highlights</span>
+        <div class="row g-4 mt-1">
           <div class="col-md-4">
-            <div class="card p-3">
-              <h5>UV Index</h5>
-              <p>5</p>
+            <div class="card p-3 card-sunrise-sunset">
+              <span className="card-title">sunrise & sunset</span>
+              <p>sunrise: 1740726015</p>
+              <p>sunset: 1740767165</p>
             </div>
           </div>
           <div class="col-md-4">
-            <div class="card p-3">
-              <h5>Wind Status</h5>
-              <p>7.70 km/h</p>
+            <div class="card p-3 card-wind">
+              <span className="card-title">Wind Status</span>
+              <p>Speed: 4.12 m/s</p>
+              <p>Degrees: 270°</p>
             </div>
           </div>
           <div class="col-md-4">
-            <div class="card p-3">
-              <h5>Humidity</h5>
-              <p>12%</p>
+            <div class="card p-3 card-humidity">
+              <span className="card-title">Humidity</span>
+              <p>Humidity: 67%</p>
             </div>
           </div>
           <div class="col-md-4">
-            <div class="card p-3">
-              <h5>UV Index</h5>
-              <p>5</p>
+            <div class="card p-3 card-temperature">
+              <span className="card-title">Temperature</span>
+              <p>temp: 17°C | Feels like: 16°C</p>
+              <p>Min: 16°C | Max: 17°C</p>
             </div>
           </div>
           <div class="col-md-4">
-            <div class="card p-3">
-              <h5>Wind Status</h5>
-              <p>7.70 km/h</p>
+            <div class="card p-3 card-pressure">
+              <span className="card-title">Pressure</span>
+              <p>At sea level: 1012</p>
+              <p>At ground level: 1004</p>
             </div>
           </div>
           <div class="col-md-4">
-            <div class="card p-3">
-              <h5>Humidity</h5>
-              <p>12%</p>
+            <div class="card p-3 card-visibility">
+              <span className="card-title">Visibility</span>
+              <p>Visibility: 6000m</p>
             </div>
           </div>
         </div>
