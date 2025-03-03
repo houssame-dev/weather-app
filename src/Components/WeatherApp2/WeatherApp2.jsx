@@ -54,8 +54,8 @@ export const WeatherApp2 = () => {
       document.querySelector(".sidebar-temp").innerText = `${Math.floor(data.main.temp)}° C`;
 
       //content
-      document.querySelector(".sunrise-value").innerText = `${data.sys.sunrise}`;
-      document.querySelector(".sunset-value").innerText = `${data.sys.sunset}`;
+      document.querySelector(".sunrise-value").innerText = formatTimestamp(data.sys.sunrise);
+      document.querySelector(".sunset-value").innerText = formatTimestamp(data.sys.sunset);
       document.querySelector(".humidity-value").innerText = `${data.main.humidity} %`;
       document.querySelector(".wind-speed-value").innerText = `${data.wind.speed} Km/h`;
       document.querySelector(".wind-deg-value").innerText = `${data.wind.deg}°`;
@@ -109,6 +109,14 @@ export const WeatherApp2 = () => {
       search();
     }
   };
+
+  // Convert Unix timestamp to a readable time format (HH:MM)
+  function formatTimestamp(timestamp) {
+    const date = new Date(timestamp * 1000); // Multiply by 1000 to convert from seconds to milliseconds
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    return `${hours}:${minutes}`;
+  }
 
   useEffect(() => {
     search("New York"); // Fetch New York weather on load
@@ -165,11 +173,11 @@ export const WeatherApp2 = () => {
         <div className="d-flex justify-content-start align-items-center gap-4">
           <div className="d-flex justify-content-start align-items-center gap-1">
             <MdCalendarMonth color="#ffffff" size={19}/>
-            <span className="sidebar-day">Mon - 23/09</span>
+            <span className="sidebar-day">?</span>
           </div>
           <div className="d-flex justify-content-start align-items-center gap-1">
             <MdAccessTime color="#ecc8c8" size={19}/>
-            <span className="sidebar-time">16:05:34</span>
+            <span className="sidebar-time">?</span>
           </div>
         </div>
         <hr />
