@@ -48,7 +48,7 @@
   font-weight: 200; /* (100 200 300 400 500 600 700 800 900) (Italic) */
 }
 
-.sidebar-rain {
+.sidebar-description {
   color: #ffffff;
   font-size: 15px;
   font-weight: 100;
@@ -56,14 +56,12 @@
   font-weight: 200; /* (100 200 300 400 500 600 700 800 900) (Italic) */
 }
 
-.sidebar-city-name {
+.sidebar-location {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 28px;
-  padding: 5px 10px;
-  border-radius: 5px;
   color: #ffffff;
   white-space: nowrap;
   z-index: 1;
