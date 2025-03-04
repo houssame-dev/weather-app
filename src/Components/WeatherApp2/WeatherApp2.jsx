@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./WeatherApp2.css";
 import day_clear_sky from "../Assets/day_clear_sky.png";
 import day_few_clouds from "../Assets/day_few_clouds.png";
@@ -18,60 +18,133 @@ import night_rain from "../Assets/night_rain.png";
 import night_thunderstorm from "../Assets/night_thunderstorm.png";
 import night_snow from "../Assets/night_snow.png";
 import night_mist from "../Assets/night_mist.png";
-import night_full_moon_clear from "../Assets/night_full_moon_clear.png";
 import newyork from "../Assets/newyork.jpg";
 import logo from "../Assets/logo.png";
-import { MdCalendarMonth, MdAccessTime, MdOutlineSearch } from "react-icons/md";
-import { WiNightAltCloudy, WiRain } from "react-icons/wi";
+import { MdCalendarMonth, MdAccessTime, MdStorm } from "react-icons/md";
+import { RiFoggyLine, RiMistLine } from "react-icons/ri";
+import {
+  WiDaySunny,
+  WiRain,
+  WiSnow,
+  WiThunderstorm,
+  WiSprinkle,
+  WiSmoke,
+  WiDayHaze,
+  WiDust,
+  WiSandstorm,
+  WiFire,
+  WiTornado,
+  WiCloudy,
+} from "react-icons/wi";
+// Import city data - update the path to your actual JSON file location
+import citiesData from "./cities.json";
 
 export const WeatherApp2 = () => {
-  
-  let api_key = "bc7bcc1079f62421f60e6ce473e723b7";
-  const [wicon, setWicon] = useState();
+  const api_key = "bc7bcc1079f62421f60e6ce473e723b7";
+  const unsplash_access_key = "z-Fm_Q6WZCBD3IEO3p7QQ-8OD1lBxSnMFLs_5IMSJMU";
+  const [wicon, setWicon] = useState(day_clear_sky); // Set default icon
   const [city, setCity] = useState("New York"); // Default city
-  const search = async () => {
-    const element = document.getElementsByClassName("search-input");
-    if (!element[0] || element[0].value.trim() === "") {
+  const [weatherData, setWeatherData] = useState(null);
+  const [filteredCities, setFilteredCities] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
+  const timerRef = useRef(null);
+  const searchInputRef = useRef(null);
+  const suggestionsRef = useRef(null);
+  const [cityImage, setCityImage] = useState("");
+
+  // Filter cities when search term changes
+  useEffect(() => {
+    if (city.trim() === "") {
+      setFilteredCities([]);
+      setShowSuggestions(false);
+      return;
+    }
+
+    const filtered = citiesData
+      .filter((item) => item.city.toLowerCase().includes(city.toLowerCase()))
+      .slice(0, 15); // Limit to 15 suggestions
+
+    setFilteredCities(filtered);
+    setShowSuggestions(filtered.length > 0);
+  }, [city]);
+
+  // Handle clicking reset button
+  const handleReset = () => {
+    setCity("");
+    setFilteredCities([]);
+    setShowSuggestions(false);
+
+    // Focus the input after clearing
+    if (searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+  };
+
+  // Handle losing focus - hide suggestions after a short delay
+  const handleBlur = () => {
+    // Slight delay to allow click on suggestions before hiding
+    setTimeout(() => {
+      setShowSuggestions(false);
+    }, 200);
+  };
+
+  // Update date and time
+  useEffect(() => {
+    updateDateTime();
+
+    // Set interval for updating time
+    timerRef.current = setInterval(updateDateTime, 1000);
+
+    // Cleanup interval on component unmount
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+      }
+    };
+  }, []);
+
+  // Load default city on mount (only once)
+  useEffect(() => {
+    searchCity("New York");
+  }, []);
+
+  function updateDateTime() {
+    const now = new Date();
+
+    // Format date as "Mon - 23/09"
+    const options = { weekday: "short", day: "2-digit", month: "2-digit" };
+    const formattedDate = now
+      .toLocaleDateString("en-GB", options)
+      .replace(",", " -");
+
+    // Format time as "16:05:34" (24-hour format)
+    const formattedTime = now.toLocaleTimeString("en-GB", { hour12: false });
+
+    setDate(formattedDate);
+    setTime(formattedTime);
+  }
+
+  const searchCity = async (searchTerm) => {
+    if (!searchTerm || searchTerm.trim() === "") {
       alert("Please enter a city name!");
       return;
     }
-  
+
     try {
-      let url = `https://api.openweathermap.org/data/2.5/weather?q=${element[0].value}&units=Metric&appid=${api_key}`;
+      let url = `https://api.openweathermap.org/data/2.5/weather?q=${searchTerm}&units=Metric&appid=${api_key}`;
       let response = await fetch(url);
       let data = await response.json();
-  
+
       if (data.cod !== 200) {
         alert("City not found!");
         return;
       }
 
-      console.log(url);
-  
-      // Update UI elements
+      // Store the entire weather data
+      setWeatherData(data);
 
-      //sidebar
-      document.querySelector(".sidebar-temp").innerText = `${Math.floor(data.main.temp)}° C`;
-
-      //content
-      document.querySelector(".sunrise-value").innerText = formatTimestamp(data.sys.sunrise);
-      document.querySelector(".sunset-value").innerText = formatTimestamp(data.sys.sunset);
-      document.querySelector(".humidity-value").innerText = `${data.main.humidity} %`;
-      document.querySelector(".wind-speed-value").innerText = `${data.wind.speed} Km/h`;
-      document.querySelector(".wind-deg-value").innerText = `${data.wind.deg}°`;
-      document.querySelector(".temprature-value").innerText = `${Math.floor(data.main.temp)}° C`;
-      document.querySelector(".feels-like-value").innerText = `${Math.floor(data.main.feels_like)}° C`;
-      document.querySelector(".temp-min-value").innerText = `${Math.floor(data.main.temp_min)}° C`;
-      document.querySelector(".temp-max-value").innerText = `${Math.floor(data.main.temp_max)}° C`;
-      document.querySelector(".visibility-value").innerText = `${data.visibility} m`;
-      document.querySelector(".pressure-value").innerText = `${data.main.pressure}`;
-      document.querySelector(".sea-level-value").innerText = `${data.main.sea_level}`;
-      document.querySelector(".grnd-level-value").innerText = `${data.main.grnd_level}`;
-      document.querySelector(".sidebar-status").innerText = `${data.weather[0].main} ,`;
-      document.querySelector(".sidebar-description").innerText = data.weather[0].description;
-      document.querySelector(".sidebar-city-name").innerText = `${data.name},`;
-      document.querySelector(".sidebar-country").innerText = data.sys.country;
-      
       // Weather Icon Mapping
       const iconMap = {
         "01d": day_clear_sky,
@@ -93,53 +166,93 @@ export const WeatherApp2 = () => {
         "13n": night_snow,
         "50n": night_mist,
       };
-  
+
       // Set Weather Icon
       setWicon(iconMap[data.weather[0].icon] || night_clear_sky);
-      
+
+      fetchCityImage(searchTerm);
+
+      // Hide suggestions after search
+      setShowSuggestions(false);
     } catch (error) {
       console.error("Error fetching data:", error);
       alert("An error occurred. Please try again later.");
     }
   };
-  
+
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
-      search();
+      searchCity(city);
+    } else if (event.key === "Escape") {
+      setShowSuggestions(false);
     }
+  };
+
+  // Handle city selection from dropdown
+  const handleCitySelect = (selectedCity) => {
+    setCity(selectedCity);
+    searchCity(selectedCity);
+    setShowSuggestions(false);
   };
 
   // Convert Unix timestamp to a readable time format (HH:MM)
   function formatTimestamp(timestamp) {
+    if (!timestamp) return "N/A";
     const date = new Date(timestamp * 1000); // Multiply by 1000 to convert from seconds to milliseconds
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, "0");
+    const minutes = String(date.getMinutes()).padStart(2, "0");
     return `${hours}:${minutes}`;
   }
 
-  useEffect(() => {
-    search("New York"); // Fetch New York weather on load
-  });
+  const getWeatherIcon = (weatherMain) => {
+    switch (weatherMain) {
+      case "Thunderstorm":
+        return <WiThunderstorm color="#ffffff" size={19} />;
+      case "Drizzle":
+        return <WiSprinkle color="#ffffff" size={19} />;
+      case "Rain":
+        return <WiRain color="#ffffff" size={19} />;
+      case "Snow":
+        return <WiSnow color="#ffffff" size={19} />;
+      case "Mist":
+        return <RiMistLine color="#ffffff" size={19} />;
+      case "Smoke":
+        return <WiSmoke color="#ffffff" size={19} />;
+      case "Haze":
+        return <WiDayHaze color="#ffffff" size={19} />;
+      case "Dust":
+        return <WiDust color="#ffffff" size={19} />;
+      case "Fog":
+        return <RiFoggyLine color="#ffffff" size={19} />;
+      case "Sand":
+        return <WiSandstorm color="#ffffff" size={19} />;
+      case "Ash":
+        return <WiFire color="#ffffff" size={19} />;
+      case "Squall":
+        return <MdStorm color="#ffffff" size={19} />;
+      case "Tornado":
+        return <WiTornado color="#ffffff" size={19} />;
+      case "Clear":
+        return <WiDaySunny color="#ffffff" size={19} />;
+      case "Clouds":
+        return <WiCloudy color="#ffffff" size={19} />;
+      default:
+        return "?";
+    }
+  };
 
-  function updateDateTime() {
-    const now = new Date();
-  
-    // Format date as "Mon - 23/09"
-    const options = { weekday: 'short', day: '2-digit', month: '2-digit' };
-    const formattedDate = now.toLocaleDateString('en-GB', options).replace(',', ' -');
-  
-    // Format time as "16:05:34" (24-hour format)
-    const formattedTime = now.toLocaleTimeString('en-GB', { hour12: false });
-  
-    // Update the elements
-    document.querySelector(".sidebar-day").innerText = formattedDate;
-    document.querySelector(".sidebar-time").innerText = formattedTime;
-  }
-  
-  // Update every second
-  setInterval(updateDateTime, 1000);
-  
+  const fetchCityImage = async (cityName) => {
+    try {
+      let url = `https://api.unsplash.com/photos/random?query=${cityName}&client_id=${unsplash_access_key}`;
+      let response = await fetch(url);
+      let data = await response.json();
+      setCityImage(data.urls.regular);
+    } catch (error) {
+      console.error("Error fetching city image:", error);
+    }
+  };
+
   return (
     <>
       <div className="sidebar">
@@ -147,51 +260,126 @@ export const WeatherApp2 = () => {
           <img src={logo} alt="logo" className="logo" width={45} />
           <span className="sidebar-title">Weather TwoDay</span>
         </div>
-        <div className="input-group has-validation gap-2 mb-5">
-        <input
-          type="text"
-          className="form-control search-input"
-          placeholder="Search for places..."
-          value={city}
-          onChange={(e) => setCity(e.target.value)}
-          onKeyDown={handleKeyDown}
-        />
 
-        <span className="input-group-text rounded" onClick={() => search()}>
-          <MdOutlineSearch />
-        </span>
+        <div className="input-group position-relative mb-3">
+          <div className="form w-100">
+            <button onClick={() => searchCity(city)}>
+              <svg
+                width="17"
+                height="16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                role="img"
+                aria-labelledby="search"
+              >
+                <path
+                  d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9"
+                  stroke="currentColor"
+                  strokeWidth="1.333"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                ></path>
+              </svg>
+            </button>
+            <input
+              ref={searchInputRef}
+              className="input"
+              placeholder="Search for places..."
+              required=""
+              type="text"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+              onKeyDown={handleKeyDown}
+              onFocus={() => city !== "" && setShowSuggestions(true)}
+              onBlur={handleBlur}
+            />
+            {city && (
+              <button className="reset" type="reset" onClick={handleReset}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18L18 6M6 6l12 12"
+                  ></path>
+                </svg>
+              </button>
+            )}
 
+            {showSuggestions && (
+              <div ref={suggestionsRef} className="city-suggestions-div">
+                {filteredCities.map((item, index) => (
+                  <div
+                    key={index}
+                    className="suggestion-item"
+                    onClick={() => handleCitySelect(item.city)}
+                  >
+                    <span className="suggestion-city">{item.city}</span>
+                    <span className="suggestion-country">{item.iso3}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
-        <img
-          src={wicon}
-          alt="day-few-clouds"
-          className="day-few-clouds"
-        />
-        <div>
-          <span className="sidebar-temp">12°C</span>
+
+        <img src={wicon} alt="weather-icon" className="day-few-clouds" />
+        <div className="mt-3">
+          <span className="sidebar-temp">
+            {weatherData
+              ? `${Math.floor(weatherData.main.temp)} °C`
+              : "Loading..."}
+          </span>
         </div>
         <div className="d-flex justify-content-start align-items-center gap-4">
           <div className="d-flex justify-content-start align-items-center gap-1">
-            <MdCalendarMonth color="#ffffff" size={19}/>
-            <span className="sidebar-day">?</span>
+            <MdCalendarMonth color="#ffffff" size={19} />
+            <span className="sidebar-day">{date}</span>
           </div>
           <div className="d-flex justify-content-start align-items-center gap-1">
-            <MdAccessTime color="#ecc8c8" size={19}/>
-            <span className="sidebar-time">?</span>
+            <MdAccessTime color="#ecc8c8" size={19} />
+            <span className="sidebar-time">{time}</span>
           </div>
         </div>
         <hr />
         <div className="d-flex justify-content-start align-items-center gap-2">
-          <WiNightAltCloudy color="#ffffff" size={19}/>
-          <span className="sidebar-status">?</span>
-          <span className="sidebar-description">?</span>
+          {weatherData ? getWeatherIcon(weatherData.weather[0].main) : ""}
+          <span className="sidebar-status">
+            {weatherData ? `${weatherData.weather[0].main} ,` : "Loading..."}
+          </span>
+          <span className="sidebar-description">
+            {weatherData ? weatherData.weather[0].description : ""}
+          </span>
         </div>
         <div className="d-flex justify-content-center align-items-center mt-4 position-relative">
           <div className="d-flex justify-content-center align-items-center gap-2 sidebar-location">
-           <span className="sidebar-city-name">?</span>
-           <span className="sidebar-country">?</span>
+            <span className="sidebar-city-name">
+              {weatherData
+                ? weatherData.name.length > 11
+                  ? `${weatherData.name.substring(0, 11)}...,`
+                  : `${weatherData.name}, `
+                : "Loading..."}
+            </span>
+            <span className="sidebar-country">
+              {weatherData
+                ? weatherData.sys.country === "EH"
+                  ? "MA"
+                  : weatherData.sys.country
+                : ""}
+            </span>
+
           </div>
-          <img src={newyork} alt="city-img" className="sidebar-city-img" />
+          <img
+            src={cityImage || newyork} // Use a default image if none is found
+            alt="city-img"
+            className="sidebar-city-img"
+          />
         </div>
       </div>
 
@@ -201,44 +389,109 @@ export const WeatherApp2 = () => {
           <div className="col-md-4">
             <div className="card p-3 card-sunrise-sunset">
               <span className="card-title">Sunrise & Sunset</span>
-              <p className="sunrise-value">?</p>
-              <p className="sunset-value">?</p>
+              <p className="sunrise-value">
+                {weatherData
+                  ? formatTimestamp(weatherData.sys.sunrise)
+                  : "Loading..."}
+              </p>
+              <p className="sunset-value">
+                {weatherData
+                  ? formatTimestamp(weatherData.sys.sunset)
+                  : "Loading..."}
+              </p>
             </div>
           </div>
           <div className="col-md-4">
             <div className="card p-3 card-wind">
               <span className="card-title">Wind Status</span>
-              <p className="wind-speed-value">?</p>
-              <p className="wind-deg-value">?</p>
+              <p className="wind-speed-value">
+                {weatherData ? `${weatherData.wind.speed} Km/h` : "Loading..."}
+              </p>
+              <p className="wind-deg-value">
+                {weatherData ? `${weatherData.wind.deg}°` : ""}
+              </p>
             </div>
           </div>
           <div className="col-md-4">
             <div className="card p-3 card-humidity">
               <span className="card-title">Humidity</span>
-              <p className="humidity-value">?</p>
+              <p className="humidity-value">
+                {weatherData ? `${weatherData.main.humidity} %` : "Loading..."}
+              </p>
             </div>
           </div>
           <div className="col-md-4">
             <div className="card p-3 card-temperature">
               <span className="card-title">Temperature</span>
-              <span className="temprature-value">?</span>
-              <span className="feels-like-value">?</span>
-              <span className="temp-min-value">?</span>
-              <span className="temp-max-value">?</span>
+              <div className="temperature-details">
+                <span className="temp-label">Current:</span>
+                <span className="temprature-value">
+                  {weatherData
+                    ? `${Math.floor(weatherData.main.temp)}° C`
+                    : "Loading..."}
+                </span>
+              </div>
+              <div className="temperature-details">
+                <span className="temp-label">Feels like:</span>
+                <span className="feels-like-value">
+                  {weatherData
+                    ? `${Math.floor(weatherData.main.feels_like)}° C`
+                    : "Loading..."}
+                </span>
+              </div>
+              <div className="temperature-details">
+                <span className="temp-label">Min:</span>
+                <span className="temp-min-value">
+                  {weatherData
+                    ? `${Math.floor(weatherData.main.temp_min)}° C`
+                    : "Loading..."}
+                </span>
+              </div>
+              <div className="temperature-details">
+                <span className="temp-label">Max:</span>
+                <span className="temp-max-value">
+                  {weatherData
+                    ? `${Math.floor(weatherData.main.temp_max)}° C`
+                    : "Loading..."}
+                </span>
+              </div>
             </div>
           </div>
           <div className="col-md-4">
             <div className="card p-3 card-pressure">
               <span className="card-title">Pressure</span>
-              <span className="pressure-value">?</span>
-              <span className="sea-level-value">?</span>
-              <span className="grnd-level-value">?</span>
+              <div className="pressure-details">
+                <span className="pressure-label">Pressure:</span>
+                <span className="pressure-value">
+                  {weatherData
+                    ? `${weatherData.main.pressure} hPa`
+                    : "Loading..."}
+                </span>
+              </div>
+              <div className="pressure-details">
+                <span className="pressure-label">Sea level:</span>
+                <span className="sea-level-value">
+                  {weatherData && weatherData.main.sea_level
+                    ? `${weatherData.main.sea_level} hPa`
+                    : "N/A"}
+                </span>
+              </div>
+              <div className="pressure-details">
+                <span className="pressure-label">Ground level:</span>
+                <span className="grnd-level-value">
+                  {weatherData && weatherData.main.grnd_level
+                    ? `${weatherData.main.grnd_level} hPa`
+                    : "N/A"}
+                </span>
+              </div>
             </div>
           </div>
           <div className="col-md-4">
             <div className="card p-3 card-visibility">
               <span className="card-title">Visibility</span>
-              <span className="visibility-value">?</span>
+              <span className="visibility-value">
+                {weatherData ? `${weatherData.visibility} m` : "Loading..."}
+              </span>
             </div>
           </div>
         </div>
