@@ -31,7 +31,7 @@
   padding-inline: 0.3em;
   border-radius: var(--border-radius);
   transition: border-radius 0.5s ease;
-  background: var(--input-bg,#ffffff);
+  background: var(--input-bg, #ffffff);
 }
 
 .sidebar .input {
@@ -102,7 +102,7 @@
   user-select: none;
 }
 
-.sidebar .suggestion-item{
+.sidebar .suggestion-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -110,14 +110,14 @@
   cursor: pointer;
 }
 
-.sidebar .suggestion-city{
+.sidebar .suggestion-city {
   color: #2f2ee9;
   font-size: 14px;
   font-family: "Kanit", serif;
   font-weight: 300; /* (100 200 300 400 500 600 700 800 900) (Italic) */
 }
 
-.sidebar .suggestion-country{
+.sidebar .suggestion-country {
   color: #2f2ee9;
   font-size: 14px;
   font-family: "Kanit", serif;
@@ -155,7 +155,6 @@
 .sidebar-status {
   color: #ffffff;
   font-size: 15px;
-  font-weight: 100;
   font-family: "Kanit", serif;
   font-weight: 200; /* (100 200 300 400 500 600 700 800 900) (Italic) */
 }
@@ -163,7 +162,6 @@
 .sidebar-description {
   color: #ffffff;
   font-size: 15px;
-  font-weight: 100;
   font-family: "Kanit", serif;
   font-weight: 200; /* (100 200 300 400 500 600 700 800 900) (Italic) */
 }
@@ -193,7 +191,7 @@
 
 /* Style the track (the part the thumb slides within) */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; /* Light grey */
+  background: transparent; /* Light grey */
   border-radius: 10px;
 }
 
@@ -225,35 +223,44 @@
 .content .card {
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
   height: 10rem;
+  border-radius: 30px;
 }
 
 .content .card-title {
-  color: #ffffff;
+  color: #f3ebeb;
   font-size: 20px;
-  font-family: "Lilita One", serif;
-  font-weight: 400; /* (only 400) */
+  font-family: "Kanit", serif;
+  font-weight: 200; /* (100 200 300 400 500 600 700 800 900) (Italic) */
 }
 
 .content .card-sunrise-sunset {
-  background: linear-gradient(to right, #e6a51979, #f7c9a07a);
+  background: linear-gradient(to right, #e6a519b0, #f7c9a0b0);
 }
 
 .content .card-wind {
-  background: linear-gradient(to right, #226ba37a, #a0c4d77a);
+  background: linear-gradient(to right, #226ba37a, #a0c4d7b0);
 }
 
 .content .card-humidity {
-  background: linear-gradient(to right, #627e757a, #a8c0a07a);
+  background: linear-gradient(to right, #627e75b0, #a8c0a0b0);
 }
 
 .content .card-temperature {
-  background: linear-gradient(to right, #e05b197a, #f7a8007a);
+  background: linear-gradient(to right, #e05b19b0, #fb0800b0);
 }
 
 .content .card-pressure {
-  background: linear-gradient(to right, #d2a9857a, #e0c8b07a);
+  background: linear-gradient(to right, #d2a985b0, #e0c8b0b0);
 }
 
 .content .card-visibility {
-  background: linear-gradient(to right, #9136397a, #d8a0a07a);
+  background: linear-gradient(to right, #913639b0, #d8a0a0b0);
+}
+
+.sunrise-value,
+.sunset-value {
+  color: #ffffff;
+  font-size: 20px;
+  font-family: "Kanit", serif;
+  font-weight: 600; /* (100 200 300 400 500 600 700 800 900) (Italic) */
 }
