@@ -22,6 +22,15 @@ import newyork from "../Assets/newyork.jpg";
 import logo from "../Assets/logo.png";
 import sunrise from "../Assets/sunrise.png";
 import sunset from "../Assets/sunset.png";
+import wind_speed from "../Assets/wind_speed.png";
+import wind_deg from "../Assets/wind_deg.png";
+import wind_gust from "../Assets/wind_gust.png";
+import humidity from "../Assets/humidity.png";
+import temperature from "../Assets/temperature.png";
+import visibility from "../Assets/visibility.png";
+import pressure from "../Assets/pressure.png";
+import sea from "../Assets/sea.png";
+import ground from "../Assets/ground.png";
 import { MdCalendarMonth, MdAccessTime, MdStorm } from "react-icons/md";
 import { RiFoggyLine, RiMistLine } from "react-icons/ri";
 import {
@@ -387,19 +396,19 @@ export const WeatherApp2 = () => {
       <div className="content">
         <span className="todays-highlights-title">Today's Highlights</span>
         <div className="row g-4 mt-1">
-          <div className="col-md-4">
+          <div className="col-lg-4 col-md-6 col-sm-12">
             <div className="card p-3 card-sunrise-sunset">
-              <span className="card-title mb-0">Sunrise & Sunset</span>
-              <div className="d-flex justify-content-start align-items-center gap-2">
-                <img src={sunrise} alt="sunrise_icon" width={50} />
+              <span className="card-title">Sunrise & Sunset</span>
+              <div className="d-flex justify-content-center align-items-center gap-5">
+                <img src={sunrise} alt="sunrise_icon" width={60} />
                 <span className="sunrise-value">
                   {weatherData?.sys?.sunrise != null
                     ? formatTimestamp(weatherData.sys.sunrise)
-                    : " "} 
+                    : " "}
                 </span>
               </div>
-              <div className="d-flex justify-content-start align-items-center gap-2">
-                <img src={sunset} alt="sunset_icon" width={50} />
+              <div className="d-flex justify-content-center align-items-center gap-5">
+                <img src={sunset} alt="sunset_icon" width={60} />
                 <span className="sunset-value">
                   {weatherData?.sys?.sunset != null
                     ? formatTimestamp(weatherData.sys.sunset)
@@ -408,107 +417,140 @@ export const WeatherApp2 = () => {
               </div>
             </div>
           </div>
-          <div className="col-md-4">
+          <div className="col-lg-4 col-md-6 col-sm-12">
             <div className="card p-3 card-wind">
               <span className="card-title">Wind Status</span>
-              <p className="wind-speed-value">
-                {weatherData?.wind?.speed != null
-                  ? `${weatherData.wind.speed} Km/h`
-                  : " "}
-              </p>
-              <p className="wind-deg-value">
-                {weatherData?.wind?.deg != null
-                  ? `${weatherData.wind.deg}°`
-                  : " "}
-              </p>
-
-              <p className="wind-deg-value">{weatherData?.wind?.gust ?? " "}</p>
+              <div className="d-flex justify-content-center align-items-center gap-3 mb-3">
+                <img src={wind_speed} alt="wind_speed" width={70} />
+                <span className="wind-speed-value">
+                  {weatherData?.wind?.speed != null
+                    ? `${weatherData.wind.speed} Km/h`
+                    : " "}
+                </span>
+              </div>
+              <div className="d-flex justify-content-around align-items-center">
+                <div className="d-flex justify-content-center align-items-center gap-2">
+                  <img src={wind_deg} alt="wind_deg" width={25} />
+                  <span className="wind-deg-value">
+                    {weatherData?.wind?.deg != null
+                      ? `${weatherData.wind.deg}°`
+                      : " "}
+                  </span>
+                </div>
+                <div className="d-flex justify-content-center align-items-center gap-2">
+                  <img src={wind_gust} alt="wind_gust" width={25} />
+                  <span className="wind-gust-value">
+                    {weatherData?.wind?.gust ?? " "}
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="col-md-4">
+          <div className="col-lg-4 col-md-6 col-sm-12">
             <div className="card p-3 card-humidity">
               <span className="card-title">Humidity</span>
-              <p className="humidity-value">
-                {weatherData?.main?.humidity != null
-                  ? `${weatherData.main.humidity} %`
-                  : " "}
-              </p>
+              <div className="d-flex justify-content-between align-items-center">
+                <span className="humidity-value">
+                  {weatherData?.main?.humidity != null
+                    ? `${weatherData.main.humidity} %`
+                    : " "}
+                </span>
+                <img src={humidity} alt="humidity" width={70} />
+              </div>
+              <div>
+                <span className="humidity-status">normal 👍</span>
+              </div>
             </div>
           </div>
-          <div className="col-md-4">
+          <div className="col-lg-4 col-md-6 col-sm-12">
             <div className="card p-3 card-temperature">
               <span className="card-title">Temperature</span>
-              <div className="temperature-details">
-                <span className="temp-label">Current:</span>
-                <span className="temprature-value">
-                  {weatherData?.main?.temp != null
-                    ? `${Math.floor(weatherData.main.temp)}° C`
-                    : " "}
-                </span>
-              </div>
-              <div className="temperature-details">
-                <span className="temp-label">Feels like:</span>
-                <span className="feels-like-value">
-                  {weatherData?.main?.feels_like != null
-                    ? `${Math.floor(weatherData.main.feels_like)}° C`
-                    : " "}
-                </span>
-              </div>
-              <div className="temperature-details">
-                <span className="temp-label">Min:</span>
-                <span className="temp-min-value">
-                  {weatherData?.main?.temp_min != null
-                    ? `${Math.floor(weatherData.main.temp_min)}° C`
-                    : " "}
-                </span>
-              </div>
-              <div className="temperature-details">
-                <span className="temp-label">Max:</span>
-                <span className="temp-max-value">
-                  {weatherData?.main?.temp_max != null
-                    ? `${Math.floor(weatherData.main.temp_max)}° C`
-                    : " "}
-                </span>
+              <div className="d-flex justify-content-between align-items-center">
+                <div>
+                  <img src={temperature} alt="temperature" width={90} />
+                </div>
+                <div>
+                  <div className="temperature-details">
+                    <span className="temp-label">Current : </span>
+                    <span className="temprature-value">
+                      {weatherData?.main?.temp != null
+                        ? `${Math.floor(weatherData.main.temp)}° C`
+                        : " "}
+                    </span>
+                  </div>
+                  <div className="temperature-details">
+                    <span className="temp-label">Feels like : </span>
+                    <span className="feels-like-value">
+                      {weatherData?.main?.feels_like != null
+                        ? `${Math.floor(weatherData.main.feels_like)}° C`
+                        : " "}
+                    </span>
+                  </div>
+                  <div className="temperature-details">
+                    <span className="temp-label">Min : </span>
+                    <span className="temp-min-value">
+                      {weatherData?.main?.temp_min != null
+                        ? `${Math.floor(weatherData.main.temp_min)}° C`
+                        : " "}
+                    </span>
+                  </div>
+                  <div className="temperature-details">
+                    <span className="temp-label">Max : </span>
+                    <span className="temp-max-value">
+                      {weatherData?.main?.temp_max != null
+                        ? `${Math.floor(weatherData.main.temp_max)}° C`
+                        : " "}
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <div className="col-md-4">
+          <div className="col-lg-4 col-md-6 col-sm-12">
             <div className="card p-3 card-pressure">
               <span className="card-title">Pressure</span>
-              <div className="pressure-details">
-                <span className="pressure-label">Pressure:</span>
+              <div className="d-flex justify-content-center align-items-center gap-3 mb-3">
+                <img src={pressure} alt="pressure" width={70} />
                 <span className="pressure-value">
                   {weatherData?.main?.pressure != null
                     ? `${weatherData.main.pressure} hPa`
                     : " "}
                 </span>
               </div>
-              <div className="pressure-details">
-                <span className="pressure-label">Sea level:</span>
-                <span className="sea-level-value">
-                  {weatherData?.main?.sea_level != null
-                    ? `${weatherData.main.sea_level} hPa`
-                    : " "}
-                </span>
-              </div>
-              <div className="pressure-details">
-                <span className="pressure-label">Ground level:</span>
-                <span className="grnd-level-value">
-                  {weatherData?.main?.grnd_level != null
-                    ? `${weatherData.main.grnd_level} hPa`
-                    : " "}
-                </span>
+              <div className="d-flex justify-content-around align-items-center">
+                <div className="d-flex justify-content-center align-items-center gap-2">
+                  <img src={sea} alt="sea" width={20} />
+                  <span className="sea-level-value">
+                    {weatherData?.main?.sea_level != null
+                      ? `${weatherData.main.sea_level} hPa`
+                      : " "}
+                  </span>
+                </div>
+                <div className="d-flex justify-content-center align-items-center gap-2">
+                  <img src={ground} alt="ground" width={20} />
+                  <span className="grnd-level-value">
+                    {weatherData?.main?.grnd_level != null
+                      ? `${weatherData.main.grnd_level} hPa`
+                      : " "}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
-          <div className="col-md-4">
+          <div className="col-lg-4 col-md-6 col-sm-12">
             <div className="card p-3 card-visibility">
               <span className="card-title">Visibility</span>
-              <span className="visibility-value">
-                {weatherData?.visibility != null
+              <div className="d-flex justify-content-between align-items-center">
+                <span className="visibility-value">
+                  {weatherData?.visibility != null
                     ? `${weatherData.visibility} m`
                     : " "}
-              </span>
+                </span>
+                <img src={visibility} alt="visibility" width={70} />
+              </div>
+              <div>
+                <span className="visibility-status">Average 😀</span>
+              </div>
             </div>
           </div>
         </div>

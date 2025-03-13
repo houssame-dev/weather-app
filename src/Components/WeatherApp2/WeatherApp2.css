@@ -1,4 +1,4 @@
-/* sidebar */
+/*---------------------------------------- sidebar ----------------------------------------*/
 
 .sidebar {
   width: 300px;
@@ -206,7 +206,7 @@
   background: #555; /* Darker grey */
 }
 
-/* content */
+/*---------------------------------------------- content --------------------------------------*/
 
 .content {
   margin-left: 320px;
@@ -222,11 +222,12 @@
 
 .content .card {
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-  height: 10rem;
+  height: 13rem;
   border-radius: 30px;
 }
 
 .content .card-title {
+  text-align: center;
   color: #f3ebeb;
   font-size: 20px;
   font-family: "Kanit", serif;
@@ -260,7 +261,102 @@
 .sunrise-value,
 .sunset-value {
   color: #ffffff;
+  font-size: 30px;
+  font-family: "Kanit", serif;
+  font-weight: 600; /* (100 200 300 400 500 600 700 800 900) (Italic) */
+  width: 80px;
+}
+
+.wind-speed-value {
+  color: #ffffff;
+  font-size: 50px;
+  font-family: "Kanit", serif;
+  font-weight: 600; /* (100 200 300 400 500 600 700 800 900) (Italic) */
+}
+
+.wind-deg-value,
+.wind-gust-value {
+  color: #ffffff;
+  font-size: 20px;
+  font-family: "Kanit", serif;
+  font-weight: 300; /* (100 200 300 400 500 600 700 800 900) (Italic) */
+}
+
+.humidity-value {
+  color: #ffffff;
+  font-size: 50px;
+  font-family: "Kanit", serif;
+  font-weight: 600; /* (100 200 300 400 500 600 700 800 900) (Italic) */
+}
+
+.humidity-status {
+  color: #ffffff;
+  font-size: 20px;
+  font-family: "Kanit", serif;
+  font-weight: 300; /* (100 200 300 400 500 600 700 800 900) (Italic) */
+}
+
+.temp-label {
+  color: #ffffff;
+  font-size: 20px;
+  font-family: "Kanit", serif;
+  font-weight: 300; /* (100 200 300 400 500 600 700 800 900) (Italic) */
+}
+
+.temprature-value {
+  color: #ffffff;
   font-size: 20px;
   font-family: "Kanit", serif;
   font-weight: 600; /* (100 200 300 400 500 600 700 800 900) (Italic) */
+}
+
+.feels-like-value {
+  color: #ffffff;
+  font-size: 20px;
+  font-family: "Kanit", serif;
+  font-weight: 600; /* (100 200 300 400 500 600 700 800 900) (Italic) */
+}
+
+.temp-min-value,
+.temp-max-value {
+  color: #ffffff;
+  font-size: 20px;
+  font-family: "Kanit", serif;
+  font-weight: 600; /* (100 200 300 400 500 600 700 800 900) (Italic) */
+}
+
+.temp-max-value {
+  color: #ffffff;
+  font-size: 20px;
+  font-family: "Kanit", serif;
+  font-weight: 600; /* (100 200 300 400 500 600 700 800 900) (Italic) */
+}
+
+.visibility-value {
+  color: #ffffff;
+  font-size: 50px;
+  font-family: "Kanit", serif;
+  font-weight: 600; /* (100 200 300 400 500 600 700 800 900) (Italic) */
+}
+
+.visibility-status {
+  color: #ffffff;
+  font-size: 20px;
+  font-family: "Kanit", serif;
+  font-weight: 300; /* (100 200 300 400 500 600 700 800 900) (Italic) */
+}
+
+.pressure-value {
+  color: #ffffff;
+  font-size: 50px;
+  font-family: "Kanit", serif;
+  font-weight: 600; /* (100 200 300 400 500 600 700 800 900) (Italic) */
+}
+
+.grnd-level-value,
+.sea-level-value {
+  color: #ffffff;
+  font-size: 20px;
+  font-family: "Kanit", serif;
+  font-weight: 300; /* (100 200 300 400 500 600 700 800 900) (Italic) */
 }
