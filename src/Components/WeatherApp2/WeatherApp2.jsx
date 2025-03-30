@@ -368,7 +368,7 @@ export const WeatherApp2 = () => {
             {weatherData ? weatherData.weather[0].description : ""}
           </span>
         </div>
-        <div className="d-flex justify-content-center align-items-center mt-4 position-relative">
+        <div className="d-flex justify-content-center align-items-center mt-4 position-relative" id="sidebar-image">
           <div className="d-flex justify-content-center align-items-center gap-2 sidebar-location">
             <span className="sidebar-city-name">
               {weatherData

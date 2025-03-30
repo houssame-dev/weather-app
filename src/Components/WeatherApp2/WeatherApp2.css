@@ -6,10 +6,12 @@
   position: fixed;
   left: 0;
   top: 0;
-  background: #2f2ee97a;
+  background: #14213D;
+  border: 2px solid #09f;
   padding: 20px;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
   overflow-y: scroll;
+  margin-left: 10px;
 }
 
 .sidebar .form button {
@@ -235,27 +237,33 @@
 }
 
 .content .card-sunrise-sunset {
-  background: linear-gradient(to right, #e6a519b0, #f7c9a0b0);
+  background: #14213D;
+  border: 2px solid #09f;
 }
 
 .content .card-wind {
-  background: linear-gradient(to right, #226ba37a, #a0c4d7b0);
+  background: #14213D;
+  border: 2px solid #09f;
 }
 
 .content .card-humidity {
-  background: linear-gradient(to right, #627e75b0, #a8c0a0b0);
+  background: #14213D;
+  border: 2px solid #09f;
 }
 
 .content .card-temperature {
-  background: linear-gradient(to right, #e05b19b0, #fb0800b0);
+  background: #14213D;
+  border: 2px solid #09f;
 }
 
 .content .card-pressure {
-  background: linear-gradient(to right, #d2a985b0, #e0c8b0b0);
+  background: #14213D;
+  border: 2px solid #09f;
 }
 
 .content .card-visibility {
-  background: linear-gradient(to right, #913639b0, #d8a0a0b0);
+  background: #14213D;
+  border: 2px solid #09f;
 }
 
 .sunrise-value,
