@@ -142,14 +142,14 @@
 
 .sidebar-day {
   color: #ffffff;
-  font-size: 20px;
+  font-size: 18px;
   font-family: "Kanit", serif;
   font-weight: 300; /* (100 200 300 400 500 600 700 800 900) (Italic) */
 }
 
 .sidebar-time {
   color: #ecc8c8;
-  font-size: 20px;
+  font-size: 18px;
   font-family: "Kanit", serif;
   font-weight: 200; /* (100 200 300 400 500 600 700 800 900) (Italic) */
 }
@@ -367,4 +367,10 @@
   font-size: 20px;
   font-family: "Kanit", serif;
   font-weight: 300; /* (100 200 300 400 500 600 700 800 900) (Italic) */
+}
+
+
+.content .card-next-5days {
+  background: #14213D;
+  border: 2px solid #09f;
 }
