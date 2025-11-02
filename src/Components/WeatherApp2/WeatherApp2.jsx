@@ -196,10 +196,12 @@ export const WeatherApp2 = () => {
     updateTimer();
     timerRef.current = setInterval(updateTimer, 1000);
     return () => clearInterval(timerRef.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cityTimezone]);
 
   useEffect(() => {
     searchCity("New York");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function updateDateTime(timezoneOverride = null) {
@@ -223,7 +225,6 @@ export const WeatherApp2 = () => {
     }
     
     // Extract date components using UTC methods (since cityDate already has timezone applied)
-    const year = cityDate.getUTCFullYear();
     const month = String(cityDate.getUTCMonth() + 1).padStart(2, '0');
     const day = String(cityDate.getUTCDate()).padStart(2, '0');
     const weekdayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
